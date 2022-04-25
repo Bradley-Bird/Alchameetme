@@ -14,18 +14,18 @@ const user = {
 test('Should render the user profile', () => {
   render(<Profile user={user} likes={user.likes} />)
 
-  const profileName = screen.getByText('Vonta')
-  const profileMotto = screen.getByText('Res Non Verba')
+  const profileName = screen.getByText(user.name)
+  const profileMotto = screen.getByText(user.motto)
   const likesHeader = screen.getByRole('heading', { name: 'Interests' })
   const likesList = screen.getByRole('list')
-  const avatar = screen.getByRole('img')
+  const avatar = screen.getByAltText(/avatar/i)
+  const headerImg = screen.getByAltText(/header/i)
 
-  expect(avatar).toEqual(user.avatar)
-  expect(likesHeader).toBeInTheDocument()
-  expect(likesList).toBeInTheDocument()
-  expect(likesList.children.length).toEqual(user.likes.length)
   expect(profileName).toBeInTheDocument()
   expect(profileMotto).toBeInTheDocument()
-
-  screen.debug()
+  expect(likesHeader).toBeInTheDocument()
+  expect(avatar).toBeInTheDocument()
+  expect(headerImg).toBeInTheDocument()
+  expect(likesList).toBeInTheDocument()
+  expect(likesList.children.length).toEqual(user.likes.length)
 })
