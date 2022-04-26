@@ -4,8 +4,10 @@ test('Should render the header', async () => {
   render(<App />)
   screen.getByText(/loading/i)
   const profileName = await screen.findByText('Vonta')
-  expect(profileName).toBeInTheDocument()
+  const headerImg = screen.getByAltText(/alchemy/i)
+  const backgroundColor = screen.getByRole('banner')
 
-  const headerImg = await screen.getByAltText(/alchemy/i)
+  expect(backgroundColor).toHaveStyle(`background: 'var--(grey)'`)
   expect(headerImg).toBeInTheDocument()
+  expect(profileName).toBeInTheDocument()
 })
